@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Dashboard</title>
+
+<link rel="stylesheet"
+href="{{url_for('static',filename='style.css')}}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🛡 Security Dashboard</h1>
+
+<h2>Welcome {{user}}</h2>
+
+<br>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Total Logins</h3>
+
+<p>{{total}}</p>
+
+</div>
+
+<div class="card">
+
+<h3>Failed Attempts</h3>
+
+<p>{{failed}}</p>
+
+</div>
+
+<div class="card">
+
+<h3>2FA Status</h3>
+
+<p>Enabled ✅</p>
+
+</div>
+
+</div>
+
+<br>
+
+<div class="card">
+
+<h2>🚨 Security Alerts</h2>
+
+<p>✓ Multi-factor authentication active</p>
+<p>✓ Account protected</p>
+
+{% if failed > 2 %}
+
+<p>
+⚠ Multiple failed login attempts detected
+</p>
+
+{% endif %}
+
+</div>
+
+<br>
+
+<div class="card">
+
+<h2>📋 Recent Login Activity</h2>
+
+<table>
+
+<tr>
+
+<th>Time</th>
+<th>Status</th>
+
+</tr>
+
+{% for row in history %}
+
+<tr>
+
+<td>{{row[0]}}</td>
+<td>{{row[1]}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+<br>
+
+<a href="/logout">
+
+<button>
+Logout
+</button>
+
+</a>
+
+</div>
+
+</body>
+
+</html>
